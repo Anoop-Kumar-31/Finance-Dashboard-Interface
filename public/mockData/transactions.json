@@ -1,0 +1,122 @@
+[
+  {
+    "id": "txn_015",
+    "date": "2026-03-15",
+    "amount": 7000,
+    "category": "Freelance",
+    "type": "income",
+    "note": "Client payment"
+  },
+  {
+    "id": "txn_014",
+    "date": "2026-03-10",
+    "amount": 1500,
+    "category": "Food",
+    "type": "expense",
+    "note": "Groceries"
+  },
+  {
+    "id": "txn_013",
+    "date": "2026-03-06",
+    "amount": 3500,
+    "category": "Shopping",
+    "type": "expense",
+    "note": "Amazon order"
+  },
+  {
+    "id": "txn_012",
+    "date": "2026-03-04",
+    "amount": 2200,
+    "category": "Transport",
+    "type": "expense",
+    "note": "Uber rides"
+  },
+  {
+    "id": "txn_011",
+    "date": "2026-03-01",
+    "amount": 52000,
+    "category": "Salary",
+    "type": "income",
+    "note": "Salary increment"
+  },
+  {
+    "id": "txn_010",
+    "date": "2026-02-18",
+    "amount": 10000,
+    "category": "Investment",
+    "type": "expense",
+    "note": "Mutual funds"
+  },
+  {
+    "id": "txn_009",
+    "date": "2026-02-12",
+    "amount": 4000,
+    "category": "Entertainment",
+    "type": "expense",
+    "note": "Movie + outing"
+  },
+  {
+    "id": "txn_008",
+    "date": "2026-02-08",
+    "amount": 1800,
+    "category": "Food",
+    "type": "expense",
+    "note": "Dining out"
+  },
+  {
+    "id": "txn_007",
+    "date": "2026-02-03",
+    "amount": 2500,
+    "category": "Bills",
+    "type": "expense",
+    "note": "Electricity bill"
+  },
+  {
+    "id": "txn_006",
+    "date": "2026-02-01",
+    "amount": 50000,
+    "category": "Salary",
+    "type": "income",
+    "note": "Monthly salary"
+  },
+  {
+    "id": "txn_005",
+    "date": "2026-01-20",
+    "amount": 8000,
+    "category": "Freelance",
+    "type": "income",
+    "note": "Side project payment"
+  },
+  {
+    "id": "txn_004",
+    "date": "2026-01-15",
+    "amount": 2000,
+    "category": "Transport",
+    "type": "expense",
+    "note": "Fuel"
+  },
+  {
+    "id": "txn_003",
+    "date": "2026-01-10",
+    "amount": 3000,
+    "category": "Shopping",
+    "type": "expense",
+    "note": "Clothes purchase"
+  },
+  {
+    "id": "txn_002",
+    "date": "2026-01-07",
+    "amount": 1200,
+    "category": "Food",
+    "type": "expense",
+    "note": "Swiggy order"
+  },
+  {
+    "id": "txn_001",
+    "date": "2026-01-05",
+    "amount": 50000,
+    "category": "Salary",
+    "type": "income",
+    "note": "Monthly salary"
+  }
+]

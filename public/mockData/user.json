@@ -1,0 +1,23 @@
+[
+  {
+    "id": "user_001",
+    "name": "Admin User",
+    "email": "admin@example.com",
+    "role": "admin",
+    "permissions": [
+      "read",
+      "create",
+      "update",
+      "delete"
+    ]
+  },
+  {
+    "id": "user_002",
+    "name": "Viewer User",
+    "email": "viewer@example.com",
+    "role": "viewer",
+    "permissions": [
+      "read"
+    ]
+  }
+]
