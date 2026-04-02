@@ -94,7 +94,7 @@ const Transactions = () => {
               if (confirm("Reset all app data to defaults? This will clear your current session and reload the latest mock data.")) {
                 localStorage.removeItem("zorvyn-store");
                 localStorage.removeItem("zorvyn-theme");
-                window.location.reload();
+                window.location.href = "/";
               }
             }}
             size="sm"

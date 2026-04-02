@@ -3,7 +3,7 @@
     "id": "user_001",
     "name": "Admin User",
     "email": "admin@example.com",
-    "role": "admin",
+    "role": "Admin",
     "permissions": [
       "read",
       "create",
@@ -15,7 +15,7 @@
     "id": "user_002",
     "name": "Viewer User",
     "email": "viewer@example.com",
-    "role": "viewer",
+    "role": "Viewer",
     "permissions": [
       "read"
     ]
