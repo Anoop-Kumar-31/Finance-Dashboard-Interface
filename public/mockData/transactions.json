@@ -1,122 +1,39 @@
 [
-  {
-    "id": "txn_015",
-    "date": "2026-03-15",
-    "amount": 7000,
-    "category": "Freelance",
-    "type": "income",
-    "note": "Client payment"
-  },
-  {
-    "id": "txn_014",
-    "date": "2026-03-10",
-    "amount": 1500,
-    "category": "Food",
-    "type": "expense",
-    "note": "Groceries"
-  },
-  {
-    "id": "txn_013",
-    "date": "2026-03-06",
-    "amount": 3500,
-    "category": "Shopping",
-    "type": "expense",
-    "note": "Amazon order"
-  },
-  {
-    "id": "txn_012",
-    "date": "2026-03-04",
-    "amount": 2200,
-    "category": "Transport",
-    "type": "expense",
-    "note": "Uber rides"
-  },
-  {
-    "id": "txn_011",
-    "date": "2026-03-01",
-    "amount": 52000,
-    "category": "Salary",
-    "type": "income",
-    "note": "Salary increment"
-  },
-  {
-    "id": "txn_010",
-    "date": "2026-02-18",
-    "amount": 10000,
-    "category": "Investment",
-    "type": "expense",
-    "note": "Mutual funds"
-  },
-  {
-    "id": "txn_009",
-    "date": "2026-02-12",
-    "amount": 4000,
-    "category": "Entertainment",
-    "type": "expense",
-    "note": "Movie + outing"
-  },
-  {
-    "id": "txn_008",
-    "date": "2026-02-08",
-    "amount": 1800,
-    "category": "Food",
-    "type": "expense",
-    "note": "Dining out"
-  },
-  {
-    "id": "txn_007",
-    "date": "2026-02-03",
-    "amount": 2500,
-    "category": "Bills",
-    "type": "expense",
-    "note": "Electricity bill"
-  },
-  {
-    "id": "txn_006",
-    "date": "2026-02-01",
-    "amount": 50000,
-    "category": "Salary",
-    "type": "income",
-    "note": "Monthly salary"
-  },
-  {
-    "id": "txn_005",
-    "date": "2026-01-20",
-    "amount": 8000,
-    "category": "Freelance",
-    "type": "income",
-    "note": "Side project payment"
-  },
-  {
-    "id": "txn_004",
-    "date": "2026-01-15",
-    "amount": 2000,
-    "category": "Transport",
-    "type": "expense",
-    "note": "Fuel"
-  },
-  {
-    "id": "txn_003",
-    "date": "2026-01-10",
-    "amount": 3000,
-    "category": "Shopping",
-    "type": "expense",
-    "note": "Clothes purchase"
-  },
-  {
-    "id": "txn_002",
-    "date": "2026-01-07",
-    "amount": 1200,
-    "category": "Food",
-    "type": "expense",
-    "note": "Swiggy order"
-  },
-  {
-    "id": "txn_001",
-    "date": "2026-01-05",
-    "amount": 50000,
-    "category": "Salary",
-    "type": "income",
-    "note": "Monthly salary"
-  }
+  { "id": 1, "type": "income", "amount": 85000, "category": "Salary", "note": "Monthly Salary - March", "date": "2026-03-01" },
+  { "id": 2, "type": "expense", "amount": 12000, "category": "Housing", "note": "Monthly Rent", "date": "2026-03-02" },
+  { "id": 3, "type": "expense", "amount": 4500, "category": "Food", "note": "Grocery Restock", "date": "2026-03-03" },
+  { "id": 4, "type": "expense", "amount": 1200, "category": "Entertainment", "note": "Netflix & Spotify", "date": "2026-03-05" },
+  { "id": 5, "type": "expense", "amount": 3500, "category": "Bills", "note": "Electricity Bill", "date": "2026-03-07" },
+  { "id": 6, "type": "expense", "amount": 8000, "category": "Shopping", "note": "Weekend Mall Trip", "date": "2026-03-08" },
+  { "id": 7, "type": "income", "amount": 15000, "category": "Freelance", "note": "Logo Design Project", "date": "2026-03-10" },
+  { "id": 8, "type": "expense", "amount": 2500, "category": "Health", "note": "Gym Membership", "date": "2026-03-12" },
+  { "id": 9, "type": "expense", "amount": 1800, "category": "Food", "note": "Dinner with friends", "date": "2026-03-14" },
+  { "id": 10, "type": "expense", "amount": 15000, "category": "Investment", "note": "Mutual Fund SIP", "date": "2026-03-15" },
+  { "id": 11, "type": "expense", "amount": 600, "category": "Bills", "note": "Mobile Recharge", "date": "2026-03-18" },
+  { "id": 12, "type": "expense", "amount": 12000, "category": "Travel", "note": "Weekend Getaway", "date": "2026-03-21" },
+  { "id": 13, "type": "expense", "amount": 2200, "category": "Food", "note": "Weekly Groceries", "date": "2026-03-23" },
+  { "id": 14, "type": "expense", "amount": 4500, "category": "Shopping", "note": "New Sneakers", "date": "2026-03-28" },
+  { "id": 15, "type": "expense", "amount": 1500, "category": "Entertainment", "note": "Movie Night", "date": "2026-03-29" },
+  
+  { "id": 16, "type": "income", "amount": 85000, "category": "Salary", "note": "Monthly Salary - February", "date": "2026-02-01" },
+  { "id": 17, "type": "expense", "amount": 12000, "category": "Housing", "note": "Monthly Rent", "date": "2026-02-02" },
+  { "id": 18, "type": "expense", "amount": 3800, "category": "Food", "note": "Groceries", "date": "2026-02-04" },
+  { "id": 19, "type": "expense", "amount": 20000, "category": "Shopping", "note": "Laptop Replacement", "date": "2026-02-07" },
+  { "id": 20, "type": "expense", "amount": 5000, "category": "Bills", "note": "Quarterly Water Bill", "date": "2026-02-10" },
+  { "id": 21, "type": "income", "amount": 12000, "category": "Freelance", "note": "Web Dev Work", "date": "2026-02-15" },
+  { "id": 22, "type": "expense", "amount": 4000, "category": "Health", "note": "Doctor Checkup", "date": "2026-02-18" },
+  { "id": 23, "type": "expense", "amount": 1500, "category": "Food", "note": "Lunch Out", "date": "2026-02-21" },
+  { "id": 24, "type": "expense", "amount": 15000, "category": "Investment", "note": "SIP", "date": "2026-02-25" },
+  { "id": 25, "type": "expense", "amount": 9500, "category": "Travel", "note": "Flight Ticket", "date": "2026-02-27" },
+
+  { "id": 26, "type": "income", "amount": 82000, "category": "Salary", "note": "Monthly Salary - January", "date": "2026-01-01" },
+  { "id": 27, "type": "expense", "amount": 12000, "category": "Housing", "note": "Rent", "date": "2026-01-02" },
+  { "id": 28, "type": "expense", "amount": 5200, "category": "Food", "note": "Bulk Kitchen Restock", "date": "2026-01-05" },
+  { "id": 29, "type": "expense", "amount": 2500, "category": "Bills", "note": "Gas Bill", "date": "2026-01-08" },
+  { "id": 30, "type": "expense", "amount": 15000, "category": "Investment", "note": "Manual SIP", "date": "2026-01-12" },
+  { "id": 31, "type": "expense", "amount": 4500, "category": "Shopping", "note": "New Year Sale", "date": "2026-01-15" },
+  { "id": 32, "type": "expense", "amount": 3200, "category": "Food", "note": "Restaurant Weekend", "date": "2026-01-18" },
+  { "id": 33, "type": "expense", "amount": 1800, "category": "Entertainment", "note": "Gaming", "date": "2026-01-22" },
+  { "id": 34, "type": "income", "amount": 5000, "category": "Freelance", "note": "Minor Bug Fix", "date": "2026-01-25" },
+  { "id": 35, "type": "expense", "amount": 1000, "category": "Bills", "note": "Internet Bill", "date": "2026-01-28" }
 ]

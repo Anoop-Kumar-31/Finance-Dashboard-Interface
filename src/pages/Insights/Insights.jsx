@@ -31,6 +31,13 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
+  LineChart,
+  Line,
+  RadarChart,
+  Radar,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
 } from "recharts";
 import { formatCurrency } from "../../utils/format";
 import Button from "../../components/ui/Button";
@@ -110,6 +117,40 @@ const Insights = () => {
     totalIncome > 0
       ? (((totalIncome - totalExpense) / totalIncome) * 100).toFixed(1)
       : "0.0";
+
+  // Day of week analysis
+  const dayOfWeekData = transactions.reduce((acc, txn) => {
+    if (txn.type === 'expense') {
+      const day = new Date(txn.date).toLocaleDateString('en-US', { weekday: 'short' });
+      const existing = acc.find(item => item.day === day);
+      if (existing) existing.amount += txn.amount;
+      else acc.push({ day, amount: txn.amount });
+    }
+    return acc;
+  }, []);
+
+  const daysOrder = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const sortedDayData = dayOfWeekData.sort((a, b) => daysOrder.indexOf(a.day) - daysOrder.indexOf(b.day));
+
+  // Spending Distribution (Radar Chart)
+  const distributionData = [
+    { subject: 'Essential', A: 0, fullMark: 100 },
+    { subject: 'Lifestyle', A: 0, fullMark: 100 },
+    { subject: 'Health', A: 0, fullMark: 100 },
+    { subject: 'Savings', A: 0, fullMark: 100 },
+    { subject: 'Other', A: 0, fullMark: 100 },
+  ];
+
+  transactions.forEach(txn => {
+    if (txn.type === 'expense') {
+      if (['Housing', 'Food', 'Bills'].includes(txn.category)) distributionData[0].A += txn.amount;
+      else if (['Entertainment', 'Shopping', 'Travel'].includes(txn.category)) distributionData[1].A += txn.amount;
+      else if (['Health', 'Fitness'].includes(txn.category)) distributionData[2].A += txn.amount;
+      else distributionData[4].A += txn.amount;
+    } else {
+      distributionData[3].A += txn.amount;
+    }
+  });
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (!active || !payload?.length) return null;
@@ -391,6 +432,68 @@ const Insights = () => {
                       animationDuration={1500}
                     />
                   </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Day of Week Analysis */}
+        <motion.div variants={itemVariants}>
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-2 mb-1">
+                <BarChart3 size={18} className="text-orange-500" />
+                <CardTitle>Day of Week Analysis</CardTitle>
+              </div>
+              <CardDescription>Identify your busiest spending days</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-[300px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={sortedDayData}>
+                    <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: "#94a3b8" }} />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Bar
+                      dataKey="amount"
+                      fill="#f59e0b"
+                      radius={[6, 6, 0, 0]}
+                      barSize={32}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Spending Radar */}
+        <motion.div variants={itemVariants}>
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-2 mb-1">
+                <PieChartIcon size={18} className="text-purple-500" />
+                <CardTitle>Spending Balance</CardTitle>
+              </div>
+              <CardDescription>Distribution across life pillars</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-[300px] flex justify-center">
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadarChart cx="50%" cy="50%" outerRadius="80%" data={distributionData}>
+                    <PolarGrid stroke="#e2e8f0" />
+                    <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11, fill: "#94a3b8" }} />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Radar
+                      name="Spending"
+                      dataKey="A"
+                      stroke="#8b5cf6"
+                      fill="#8b5cf6"
+                      fillOpacity={0.6}
+                    />
+                  </RadarChart>
                 </ResponsiveContainer>
               </div>
             </CardContent>
