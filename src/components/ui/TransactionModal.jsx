@@ -31,28 +31,30 @@ const Field = ({ label, error, icon: Icon, children }) => (
   </div>
 );
 
-const TransactionModal = ({ isOpen, onClose, editingTransaction = null }) => {
+const TransactionModal = ({ isOpen, onClose, editingTransaction = null, viewingTransaction = null, type }) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState(emptyForm);
   const [errors, setErrors] = useState({});
 
   const isEditing = !!editingTransaction;
+  const isViewing = !!viewingTransaction;
+  const activeTxn = editingTransaction || viewingTransaction;
 
-  // Sync the form state if we're editing an existing record
+  // Sync the form state if we're editing an existing record or viewing details
   useEffect(() => {
-    if (isEditing) {
+    if (activeTxn) {
       setForm({
-        type: editingTransaction.type,
-        amount: String(editingTransaction.amount),
-        category: editingTransaction.category,
-        note: editingTransaction.note || "",
-        date: editingTransaction.date?.split("T")[0] || new Date().toISOString().split("T")[0],
+        type: activeTxn.type,
+        amount: String(activeTxn.amount),
+        category: activeTxn.category,
+        note: activeTxn.note || "",
+        date: activeTxn.date?.split("T")[0] || new Date().toISOString().split("T")[0],
       });
     } else {
       setForm(emptyForm);
     }
     setErrors({});
-  }, [editingTransaction, isOpen]);
+  }, [activeTxn, isOpen]);
 
   // UX Fix: Let users close the modal with the Escape key
   useEffect(() => {
@@ -123,10 +125,10 @@ const TransactionModal = ({ isOpen, onClose, editingTransaction = null }) => {
                   </div>
                   <div>
                     <h2 className="text-base font-bold text-slate-900 dark:text-slate-50">
-                      {isEditing ? "Edit Transaction" : "Add Transaction"}
+                      {isViewing ? "Transaction Details" : isEditing ? "Edit Transaction" : "Add Transaction"}
                     </h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      {isEditing ? "Update the transaction details." : "Record a new financial entry."}
+                      {isViewing ? "View full transaction history." : isEditing ? "Update the transaction details." : "Record a new financial entry."}
                     </p>
                   </div>
                 </div>
@@ -142,11 +144,12 @@ const TransactionModal = ({ isOpen, onClose, editingTransaction = null }) => {
               <form onSubmit={handleSubmit} className="p-6 space-y-5">
                 {/* Type Toggle */}
                 <Field label="Type">
-                  <div className="grid grid-cols-2 gap-2 p-1 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                  <div className={`grid grid-cols-2 gap-2 p-1 rounded-xl bg-slate-50 dark:bg-slate-800/50 ${isViewing ? "opacity-70 pointer-events-none" : ""}`}>
                     {["income", "expense"].map((t) => (
                       <button
                         key={t}
                         type="button"
+                        disabled={isViewing}
                         onClick={() => setForm((f) => ({ ...f, type: t }))}
                         className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-sm font-semibold transition-all duration-200 ${form.type === t
                           ? t === "income"
@@ -172,7 +175,8 @@ const TransactionModal = ({ isOpen, onClose, editingTransaction = null }) => {
                         min="0"
                         step="0.01"
                         placeholder="0.00"
-                        className={`w-full pl-7 pr-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-slate-100 dark:bg-slate-800 border-transparent text-slate-900 dark:text-slate-50 ${errors.amount ? "ring-2 ring-red-500 focus:ring-red-500" : ""}`}
+                        disabled={isViewing}
+                        className={`w-full pl-7 pr-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-slate-100 dark:bg-slate-800 border-transparent text-slate-900 dark:text-slate-50 ${errors.amount ? "ring-2 ring-red-500 focus:ring-red-500" : ""} ${isViewing ? "opacity-70 cursor-not-allowed" : ""}`}
                         value={form.amount}
                         onChange={(e) => setForm((f) => ({ ...f, amount: e.target.value }))}
                       />
@@ -181,7 +185,8 @@ const TransactionModal = ({ isOpen, onClose, editingTransaction = null }) => {
                   <Field label="Date" error={errors.date} icon={Calendar}>
                     <input
                       type="date"
-                      className={`w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-slate-100 dark:bg-slate-800 border-transparent text-slate-900 dark:text-slate-50 ${errors.date ? "ring-2 ring-red-500 focus:ring-red-500" : ""}`}
+                      disabled={isViewing}
+                      className={`w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-slate-100 dark:bg-slate-800 border-transparent text-slate-900 dark:text-slate-50 ${errors.date ? "ring-2 ring-red-500 focus:ring-red-500" : ""} ${isViewing ? "opacity-70 cursor-not-allowed" : ""}`}
                       value={form.date}
                       onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))}
                     />
@@ -191,7 +196,8 @@ const TransactionModal = ({ isOpen, onClose, editingTransaction = null }) => {
                 {/* Category */}
                 <Field label="Category" icon={Tag}>
                   <select
-                    className="w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-slate-100 dark:bg-slate-800 border-transparent text-slate-900 dark:text-slate-50 cursor-pointer appearance-none"
+                    disabled={isViewing}
+                    className={`w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-slate-100 dark:bg-slate-800 border-transparent text-slate-900 dark:text-slate-50 cursor-pointer appearance-none ${isViewing ? "opacity-70 cursor-not-allowed" : ""}`}
                     value={form.category}
                     onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
                   >
@@ -204,25 +210,28 @@ const TransactionModal = ({ isOpen, onClose, editingTransaction = null }) => {
                   <textarea
                     rows={2}
                     placeholder="e.g. Monthly salary payment..."
-                    className={`w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-slate-100 dark:bg-slate-800 border-transparent text-slate-900 dark:text-slate-50 resize-none ${errors.note ? "ring-2 ring-red-500 focus:ring-red-500" : ""}`}
+                    disabled={isViewing}
+                    className={`w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-slate-100 dark:bg-slate-800 border-transparent text-slate-900 dark:text-slate-50 resize-none ${errors.note ? "ring-2 ring-red-500 focus:ring-red-500" : ""} ${isViewing ? "opacity-70 cursor-not-allowed" : ""}`}
                     value={form.note}
                     onChange={(e) => setForm((f) => ({ ...f, note: e.target.value }))}
                   />
                 </Field>
 
                 {/* Actions */}
-                <div className="flex gap-3 pt-1">
-                  <button
-                    type="button"
-                    onClick={onClose}
-                    className="flex-1 p-2 rounded-lg text-sm font-semibold transition-colors bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700"
-                  >
-                    Cancel
-                  </button>
-                  <Button type="submit" className="flex-1 py-2! rounded-lg font-bold shadow-lg">
-                    {isEditing ? "Save Changes" : "Add Transaction"}
-                  </Button>
-                </div>
+                {!isViewing && (
+                  <div className="flex gap-3 pt-1">
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      className="flex-1 p-2.5 rounded-xl text-sm font-semibold transition-colors bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700"
+                    >
+                      Cancel
+                    </button>
+                    <Button type="submit" className="flex-1 py-2! rounded-lg font-bold shadow-lg">
+                      {isEditing ? "Save Changes" : "Add Transaction"}
+                    </Button>
+                  </div>
+                )}
               </form>
             </div>
           </motion.div>

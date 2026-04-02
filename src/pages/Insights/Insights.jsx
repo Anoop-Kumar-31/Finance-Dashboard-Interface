@@ -137,7 +137,7 @@ const Insights = () => {
     { subject: 'Essential', A: 0, fullMark: 100 },
     { subject: 'Lifestyle', A: 0, fullMark: 100 },
     { subject: 'Health', A: 0, fullMark: 100 },
-    { subject: 'Savings', A: 0, fullMark: 100 },
+    { subject: 'Investments', A: 0, fullMark: 100 },
     { subject: 'Other', A: 0, fullMark: 100 },
   ];
 
@@ -146,9 +146,8 @@ const Insights = () => {
       if (['Housing', 'Food', 'Bills'].includes(txn.category)) distributionData[0].A += txn.amount;
       else if (['Entertainment', 'Shopping', 'Travel'].includes(txn.category)) distributionData[1].A += txn.amount;
       else if (['Health', 'Fitness'].includes(txn.category)) distributionData[2].A += txn.amount;
+      else if (txn.category === 'Investment') distributionData[3].A += txn.amount;
       else distributionData[4].A += txn.amount;
-    } else {
-      distributionData[3].A += txn.amount;
     }
   });
 
@@ -326,7 +325,7 @@ const Insights = () => {
               {/* Total indicator in center */}
               <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
                 <p className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-widest">Total Spent</p>
-                <p className="text-2xl font-black text-slate-900 dark:text-slate-50">{formatCurrency(totalExpense)}</p>
+                <p className="text-xl font-black text-slate-900 dark:text-slate-50">{formatCurrency(totalExpense)}</p>
               </div>
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>

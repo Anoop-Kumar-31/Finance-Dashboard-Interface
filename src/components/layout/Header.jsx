@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, Moon, Sun, Bell, ShieldCheck, User, Info, DollarSign, AlertCircle, X } from "lucide-react";
+import { Menu, Moon, Sun, Bell, ShieldCheck, User, Info, DollarSign, AlertCircle, X, RotateCcw } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -139,6 +139,21 @@ const Header = ({ onMenuClick, isDarkMode, onToggleDarkMode }) => {
             </AnimatePresence>
           </div>
         </div>
+
+        <button
+          onClick={() => {
+            if (confirm("Reset all app data to defaults? This will clear your current session and reload the latest mock data.")) {
+              localStorage.removeItem("zorvyn-store");
+              localStorage.removeItem("zorvyn-theme");
+              window.location.reload();
+            }
+          }}
+          className="p-2.5 rounded-xl transition-all duration-300 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-orange-50 dark:hover:bg-orange-900/30 hover:text-orange-600 transition-colors"
+          title="Reset Data to Defaults"
+          aria-label="Reset Data"
+        >
+          <RotateCcw size={18} />
+        </button>
 
         {/* Quick User Identity Toggle */}
         <div>

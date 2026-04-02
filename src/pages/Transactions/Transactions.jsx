@@ -40,9 +40,11 @@ const Transactions = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [editingTxn, setEditingTxn] = useState(null);
+  const [viewingTxn, setViewingTxn] = useState(null);
 
   const openAdd = () => { setEditingTxn(null); setModalOpen(true); };
   const openEdit = (txn) => { setEditingTxn(txn); setModalOpen(true); };
+  const openView = (txn) => { setViewingTxn(txn); setModalOpen(true); };
   const handleDelete = (id) => {
     if (window.confirm("Delete this transaction?")) dispatch(deleteTransaction(id));
   };
@@ -53,6 +55,8 @@ const Transactions = () => {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         editingTransaction={editingTxn}
+        viewingTransaction={viewingTxn}
+        type={editingTxn ? "edit" : viewingTxn ? "view" : "add"}
       />
 
       {/* Header */}
@@ -172,6 +176,7 @@ const Transactions = () => {
         canEdit={canEdit}
         canDelete={canDelete}
         openEdit={openEdit}
+        openView={openView}
         handleDelete={handleDelete}
         dispatch={dispatch}
         resetFilters={resetFilters}

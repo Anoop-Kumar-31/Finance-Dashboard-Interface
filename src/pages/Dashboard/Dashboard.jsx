@@ -272,7 +272,7 @@ const Dashboard = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="hidden sm:flex text-indigo-600 dark:text-indigo-400"
+              className="hidden! md:flex! text-indigo-600! dark:text-indigo-400!"
               onClick={() => navigate("/transactions")}
             >
               View All <ArrowRight className="ml-1" size={14} />
@@ -319,7 +319,7 @@ const Dashboard = () => {
           </CardContent>
           <div className="p-4 border-t sm:hidden border-slate-200 dark:border-slate-800">
             <Button
-              variant="ghost" size="sm" className="w-full text-indigo-600 dark:text-indigo-400"
+              variant="ghost" size="sm" className="w-full text-indigo-600! dark:text-indigo-400!"
               onClick={() => navigate("/transactions")}
             >
               View All Transactions
