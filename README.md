@@ -15,15 +15,15 @@ A clean, interactive, and high-performance finance dashboard built to track tran
 - [✔] **Responsive Design**: Fully optimized for Mobile, Tablet, and Desktop.
 
 ## 🛠️ Tech Stack
-| Technology | Usage |
-| :--- | :--- |
-| **React 19** | Core UI Framework |
-| **Redux Toolkit** | State Management & Persistence |
-| **Tailwind CSS v4** | Modern Utility-First Styling (Class-based) |
-| **Framer Motion** | Fluid Animations & Transitions |
-| **Recharts** | Data Visualization & Charts |
-| **Lucide React** | Premium Iconography |
-| **Vite** | Lightning-fast Build Tooling |
+| Technology | Badge | Usage |
+| :--- | :--- | :--- |
+| **React 19** | ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) | Core UI Framework |
+| **Redux Toolkit** | ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) | State Management & Persistence |
+| **Tailwind CSS v4** | ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) | Modern Utility-First Styling |
+| **Framer Motion** | ![Framer](https://img.shields.io/badge/Framer-0055FF?style=for-the-badge&logo=framer&logoColor=white) | Fluid Animations & Transitions |
+| **Recharts** | ![Recharts](https://img.shields.io/badge/Recharts-22c55e?style=for-the-badge) | Data Visualization & Charts |
+| **Lucide React** | ![Lucide](https://img.shields.io/badge/Lucide-black?style=for-the-badge&logo=lucide) | Premium Iconography |
+| **Vite** | ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white) | Lightning-fast Build Tooling |
 
 ---
 
