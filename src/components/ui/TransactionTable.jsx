@@ -17,10 +17,10 @@ const TransactionTable = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  
+
   // Total pages based on filtered list
   const totalPages = Math.ceil(transactions.length / itemsPerPage);
-  
+
   // Ensure we're not on a page that doesn't exist (e.g. after filtering)
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
@@ -37,49 +37,58 @@ const TransactionTable = ({
     if (totalPages <= 1) return null;
 
     return (
-      <div className="flex items-center justify-between px-6 py-4 bg-slate-50 dark:bg-slate-800/20 border-t border-slate-200 dark:border-slate-800">
-        <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+      <div className="flex items-center justify-between px-4 sm:px-6 py-4 bg-slate-50/50 dark:bg-slate-800/10 border-t border-slate-200 dark:border-slate-800">
+        {/* Left: Range Info (Hidden on very small mobile) */}
+        <div className="hidden sm:flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
           Showing <span className="text-slate-900 dark:text-slate-50">{startIndex + 1}</span> to <span className="text-slate-900 dark:text-slate-50">{Math.min(startIndex + itemsPerPage, transactions.length)}</span> of <span className="text-slate-900 dark:text-slate-50">{transactions.length}</span>
         </div>
-        <div className="flex items-center gap-1.5 font-bold">
+
+        {/* Center/Right: Navigation */}
+        <div className="flex-1 sm:flex-initial flex items-center justify-between sm:justify-end gap-3 font-bold">
           <button
             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            className="flex items-center gap-1 p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-slate-800 transition-all active:scale-95"
           >
-            <ChevronLeft size={16} />
+            <ChevronLeft size={18} />
+            <span className="sm:hidden text-xs">Prev</span>
           </button>
-          
-          <div className="flex items-center gap-1">
-             {[...Array(totalPages)].map((_, i) => {
-               const page = i + 1;
-               // Simple logic to show only surrounding pages if many pages exist
-               if (totalPages > 5 && Math.abs(page - currentPage) > 1 && page !== 1 && page !== totalPages) {
-                 if (page === 2 || page === totalPages - 1) return <span key={page} className="px-1 text-slate-400">...</span>;
-                 return null;
-               }
-               return (
-                 <button
-                   key={page}
-                   onClick={() => setCurrentPage(page)}
-                   className={`w-8 h-8 rounded-lg text-xs font-bold transition-all ${
-                     currentPage === page 
-                     ? "bg-indigo-600 dark:bg-indigo-500 text-white shadow-md shadow-indigo-500/20" 
-                     : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
-                   }`}
-                 >
-                   {page}
-                 </button>
-               );
-             })}
+
+          {/* Detailed numbers for Desktop */}
+          <div className="hidden sm:flex items-center gap-1">
+            {[...Array(totalPages)].map((_, i) => {
+              const page = i + 1;
+              if (totalPages > 5 && Math.abs(page - currentPage) > 1 && page !== 1 && page !== totalPages) {
+                if (page === 2 || page === totalPages - 1) return <span key={page} className="px-1 text-slate-400">...</span>;
+                return null;
+              }
+              return (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`w-9 h-9 rounded-xl text-xs font-bold transition-all ${currentPage === page
+                      ? "bg-indigo-600 dark:bg-indigo-500 text-white shadow-md shadow-indigo-500/20"
+                      : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    }`}
+                >
+                  {page}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Compact indicator for Mobile */}
+          <div className="sm:hidden text-xs font-bold text-slate-500 dark:text-slate-400">
+            Page <span className="text-slate-900 dark:text-slate-50">{currentPage}</span> of {totalPages}
           </div>
 
           <button
             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            className="flex items-center gap-1 p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-slate-800 transition-all active:scale-95"
           >
-            <ChevronRight size={16} />
+            <span className="sm:hidden text-xs">Next</span>
+            <ChevronRight size={18} />
           </button>
         </div>
       </div>
@@ -278,7 +287,7 @@ const TransactionTable = ({
             </CardContent>
           </Card>
         )}
-        
+
         {/* Mobile Pagination */}
         <div className="pt-2 pb-6">
           <PaginationControls />

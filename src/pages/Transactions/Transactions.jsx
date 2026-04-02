@@ -16,7 +16,7 @@ import TransactionTable from "../../components/ui/TransactionTable";
 import useRole from "../../hooks/useRole";
 import {
   Search, Filter, X, ArrowUpRight,
-  Download, Plus, Lock,
+  Download, Plus, Lock, RotateCcw
 } from "lucide-react";
 
 const categories = [
@@ -87,6 +87,21 @@ const Transactions = () => {
           </Button>
           <Button variant="outline" size="sm" onClick={() => exportCSV(transactions)}>
             <Download size={14} /> CSV
+          </Button>
+
+          <Button
+            onClick={() => {
+              if (confirm("Reset all app data to defaults? This will clear your current session and reload the latest mock data.")) {
+                localStorage.removeItem("zorvyn-store");
+                localStorage.removeItem("zorvyn-theme");
+                window.location.reload();
+              }
+            }}
+            size="sm"
+            title="Reset Data to Defaults"
+            aria-label="Reset Data"
+          >
+            <RotateCcw size={14} /> Reset Data
           </Button>
 
           {/* Admin-only: Add Transaction */}
